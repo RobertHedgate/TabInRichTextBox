@@ -28,13 +28,13 @@ namespace TabInRichTextBox.Behaviors
         private void AssociatedObjectOnKeyDown(object sender, KeyEventArgs e)
         {
             var rtf = sender as RichTextBox;
-            // if tab key is pressed and there are hyperlinks in the RichTextBox we handle it ourselfs
+            // if not Tab key is pressed or there are no Hyperlinks in the RichTextBox let windows handle it
             if (e.Key != Key.Tab || rtf == null || !ListOfAllHyperlinks(rtf.Document).Any()) 
                 return;
 
-            // Check if shift is down
+            // Check if Shift is down
             var reverse = (Keyboard.Modifiers & ModifierKeys.Shift) > 0;
-            // If not first hyperlink has focus or if not _previousHyperLinkFocus is first hyperlink when reverse is true.
+            // if not first Hyperlink has focus or if not _previousHyperlinkFocus is first Hyperlink when reverse is true
             if (!(HasFirstLastHyperlinkFocus(rtf.Document, !reverse)  ||
                (reverse && _previousHyperlinkFocus != null && _previousHyperlinkFocus.Equals(ListOfAllHyperlinks(rtf.Document).FirstOrDefault()))))
             {
